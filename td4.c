@@ -146,7 +146,6 @@ int removeV(int t[], int n, int v) {
     return n;
 }
 
-
 // Exercice 6 - transposition d’une matrice: construction et affichage
 void transposition(int t[][MAX], int row, int col) {
     int res[col][row];

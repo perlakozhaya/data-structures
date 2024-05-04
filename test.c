@@ -3,7 +3,7 @@
 #define rows 3
 #define cols 2
 
-void transposeMatrix(int row, int col, int matrix[rows][cols]) {
+void transposeMatrix(int row, int col, int matrix[row][col]) {
     int transposedMatrix[col][row];
 
     for (int i = 0; i < row; i++) {
@@ -27,7 +27,7 @@ int main() {
         {3, 4},
         {5, 6}
     };
-
+    
     printf("Original Matrix:\n");
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
