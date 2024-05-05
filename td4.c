@@ -15,15 +15,8 @@ void sommeProduit(int vecteur[], int size) { // When you pass an array to a func
 
     printf("La somme des elements du vecteur est: %d\n", somme);
     printf("Le produit des elements du vecteur est: %d\n", produit);
-
-    // // Loop through an array and print its elements
-    // // Step 1: Create a pointer to the array
-    // int *vecteur_ptr = &vecteur;
-    // // Step 2: Access and print elements of somme using the pointer
-    // for(int i = 0; i < size; i++) {
-    //     printf("%d\n", vecteur_ptr[i]);
-    // }
 }
+
 
 // Exercice 2 - Inverser un vecteur dans un autre vecteur, puis sur lui-même.
 void inverse(int v[], int size) {
@@ -42,10 +35,13 @@ void inverse(int v[], int size) {
     printf("\n");
 }
 
-void reverse(int v[], int size, int result[]) {
+void reverse(int v[], int size) {
+    int result[size];
     for(int i = 0; i < size; i++) {
         result[i] = v[size - 1 - i];
+        printf("%d ", result[i]);
     }
+    printf("\n");
 }
 
 void reverseSelf(int v[], int size) {
@@ -62,6 +58,7 @@ void reverseSelf(int v[], int size) {
 
     printf("\n");
 }
+
 
 // Exercice 3
 void minMax(int t[], int size) {
@@ -80,6 +77,7 @@ void minMax(int t[], int size) {
     printf("Maximum: %d\nMininum: %d\n", max, min);
 }
 
+
 // Exercice 4
 bool estCroissant(int t[], int size) {
     for(int i = 0; i < size-1; i++) {
@@ -90,61 +88,32 @@ bool estCroissant(int t[], int size) {
     return false;
 }
 
+
 // Exercice 5
-int indexOf(int v[], int size, int n) {
+int removeAllOcc(int t[], int size, int v) { // O(n^2)
     for(int i = 0; i < size; i++) {
-        if(v[i] == n) {
-            return i;
+        if(t[i] == v) {
+            for(int j = i; j < size-1; j++) { // start from the index where v occurred
+                t[j] = t[j+1];
+            }
+            i--;
+            size--;
         }
     }
-    return -1;
+    return size;
 }
 
-void supprimer(int t[], int size, int v) {
-    while(indexOf(t, size, v) != -1) {
-    int index = indexOf(t, size, v);
-        for(int i = index; i < size-1; i++) {
-            t[i] = t[i+1];
-        }
-    size--;
-    }
-
-    for(int i = 0; i < size; i++) {
-        printf("%d ", t[i]);
-    }
-
-    printf("\n");
-}
-
-// with pointer (without, it only ignores the elements == v without removing them)
-void deleteAllOcc(int t[], int *n, int v) {
-    int k = 0; // New index for the updated array
-    for(int i = 0; i < *n; i++) {
+int deleteAllOcc(int t[], int n, int v) { // O(n)
+    int k = 0;
+    for(int i = 0; i < n; i++) {
         if(t[i] != v) {
             t[k++] = t[i]; // Copy non-matching elements to the beginning
         }
     }
-    *n = k; // Update the size of the array
-
-    // Print the updated array
-    for(int i = 0; i < *n; i++) {
-        printf("%d ", t[i]);
-    }
-    printf("\n");
-}
-
-int removeV(int t[], int n, int v) {
-    for(int i = 0; i < n; i++) {
-        if(t[i] == v) {
-            for(int j = i + 1; j < n; j++) {
-                t[j-1] = t[j];
-            }
-            i--;
-            n--;
-        }
-    }
+    n = k;
     return n;
 }
+
 
 // Exercice 6 - transposition d’une matrice: construction et affichage
 void transposition(int t[][MAX], int row, int col) {
@@ -163,6 +132,7 @@ void transposition(int t[][MAX], int row, int col) {
         printf("\n");
     }
 }
+
 
 // Exercice 7 - Tableau majoritaire
 bool elt_maj(int t[], int size, int e) {
@@ -187,9 +157,10 @@ bool tabMaj(int t[], int size) {
     return false;
 }
 
-/* Exercice 8 - afficher les points-col d'une matrice. On appelle points-cols
-les éléments d'une matrice qui sont à la fois un maximum sur leur ligne et un minimum sur leur 
-colonne. */
+
+/* Exercice 8 - afficher les points-col d'une matrice. 
+On appelle points-cols les éléments d'une matrice qui sont à la fois un maximum sur leur ligne 
+et un minimum sur leur colonne. */
 void pointsCols(int M[][MAX], int row, int col) {
     // 8-a hayde enjezet Richard Simon Akiki
     for(int i = 0; i < row; i++) {
@@ -218,7 +189,6 @@ void pointsCols(int M[][MAX], int row, int col) {
     }
     printf("\n");
 }
-
 // 2e methode
 void pointCol(int t[][MAX], int row, int col) {
     for(int i = 0; i < row; i++) {
@@ -263,7 +233,7 @@ int sommeTriSup(int M[][MAX], int row, int col) {
 
 int main() {
     int size = 7;
-    int vecteur[] = {7, 34, 5, 7, 7, 3, 3};
+    int vecteur[] = {7, 34, 5, 7, 7, 3, 7};
 
     int row = 3, col = 3;
     int array[3][3] = {
@@ -275,25 +245,24 @@ int main() {
     // // exercice 1
     // sommeProduit(vecteur, size);
 
-    // // exercice 2
-    // int reversedArray[size];
-    // reverse(vecteur, size, reversedArray);
-
-    // for(int i = 0; i < size; i++) {
-    //     printf("%d ", reversedArray[i]);
-    // }
-    // printf("\n");
+    // exercice 2
+    // reverse(vecteur, size);
+    // reverseSelf(vecteur, size);
 
     // // exercice 3
     // minMax(vecteur, size);
 
     // // exercice 4
-    // reverseSelf(vecteur, size);
+    // if(estCroissant(vecteur, size)) {
+    //     printf("Matrice croissante\n");
+    // }
+    // else {
+    //     printf("Matrice n'est pas croissante\n");
+    // }
 
     // exercice 5
-    // supprimer(vecteur, size, 7);
-    // deleteAllOcc(vecteur, &size, 7);
-    // printf("%d", removeV(vecteur, size, 7));
+    // printf("%d", removeAllOcc(vecteur, size, 7));
+    // printf("%d", deleteAllOcc(vecteur, size, 7));
 
     // exercice 6
     // transposition(array, row, col);
