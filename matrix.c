@@ -39,14 +39,10 @@ void transpose(int row, int col, int matrix[row][col]) {
 // 4.a Trouver le produit de deux matrices en supposant que les matrices sont carrés.
 void squareProduct(int n, int m1[n][n], int m2[n][n]) {
     int produit[n][n];
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            produit[i][j] = 0;
-        }
-    }
 
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
+            produit[i][j] = 0;
             for(int k = 0; k < n; k++) {
                 produit[i][j] += m1[i][k] * m2[k][j];
             }
@@ -59,15 +55,11 @@ void squareProduct(int n, int m1[n][n], int m2[n][n]) {
 // 4.b Trouver le produit de deux matrices quelconques
 void product(int row1, int col1, int row2, int col2, int m1[row1][col1], int m2[row2][col2]) {
     int res[row1][col2];
-    for(int i = 0; i < row1; i++) {
-        for(int j = 0; j < col2; j++) {
-            res[i][j] = 0;
-        }
-    }
 
     if(col1 == row2) {
         for(int i = 0; i < row1; i++) {
             for(int j = 0; j < col2; j++) {
+                res[i][j] = 0;
                 for(int k = 0; k < col1; k++) { // k < row2
                     res[i][j] += m1[i][k] * m2[k][j];
                 }
@@ -117,12 +109,29 @@ void selfProduct(int size, int matrice[][size], int degre) {
 }
 
 // 6. Simplification d'une matrice
+void simplify(int row, int col, int m[row][col]) {
+    int tmp1, tmp2;
+    for(int i = 0; i < row; i++) {
+        for(int j = i+1; j < col; j++) {
+            for(int k = 0; k < row; k++) {
+                tmp2 = m[j][k] * m[0][i];
+                tmp1 = m[0][k] * m[j][i];
+
+                m[j][i] = tmp2 - tmp1;
+
+                printf("%d ", m[j][i]);
+            }
+            printf("\n");
+        }
+    }
+    // displayMatrix(row, col, m);
+}
 
 int main() {
     int m1[3][3] = {
-        {1, 2, 3},
-        {8, 5, 6},
-        {8, 8, 4}
+        {2, -1, 2},
+        {4, 3, -3},
+        {-2, 2, 1}
     };
 
     int m2[3][2] = {
@@ -138,5 +147,5 @@ int main() {
 
     // transpose(3, 2, m2);
     // product(3, 2, 2, 2, m2, m3);
-    // multiplicationNew(2, m3, 3);
+    simplify(3, 3, m1);
 }
