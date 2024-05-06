@@ -1,0 +1,56 @@
+Abstract Data Types (ADT)
+
+Data Structures:
+
+Linear
+	Lists (ArrayList, LinkedList, Vector, Stack)
+	Stacks
+	Queues (Queue - FIFO, Dequeue - front and rear ends)
+
+Priority Queue
+	Array Implementation
+	Heap Implementation
+	
+Trees
+	Binary Tree
+	AVL Tree
+	B-Tree (2-3-4 Tree)
+	Red-Black Tree
+
+Hash Table
+	Choosing a Hash Function
+	Hash Collision and Resolution
+	Hash Map/Associative Array
+
+Table
+	Array Based Table (backed by a 2D Array)
+		Unsorted List - Linear Search
+		Sorted List - Binary Search
+	Tree Based Table (backed by a TreeMap)
+		Search for an element
+		Add an element
+		Remove an element
+	Hash Based Table (backed by a HashMap)
+
+Sorting Algorithms
+	
+Graph Theory: 
+
+Types of Graphs
+Representing Graphs
+	Adjacency Matrix
+	Adjacency List
+Traversing Graphs or Trees
+	Depth-First Search (DFS)
+	Breadth-First Search (BFS)
+Graph Algorithms
+	Connectivity
+	Transitive Closure
+	Shortest Path
+		Dijkstra Algorithm
+		Bellman-Ford Algorithm
+		A* Algorithm
+		IDA* Algorithm
+	Topological Sorting
+		Cycle
+		Reverse Topological Sort
