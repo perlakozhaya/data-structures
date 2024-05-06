@@ -1,67 +1,36 @@
 #include <stdio.h>
 
-#define ROWS 3
-#define COLS 3
+void matriceSimplifier(int size, double m[size][size]) {
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
 
-void printMatrix(int mat[][COLS], int rows, int cols) {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d\t", mat[i][j]);
-        }
-        printf("\n");
-    }
-}
+            //l facteur double ta ma ta3mel aroundisment lal jaweb 
+            double facteur = m[j][i] / m[i][i];//m[j][i] -> element yali bado ysir 0; m[i][i] element yali faw2o bi sater
 
-void echelonForm(int mat[][COLS], int rows, int cols) {
-    int lead = 0;
-
-    for (int r = 0; r < rows; r++) {
-        if (lead >= cols)
-            break;
-
-        int i = r;
-        while (mat[i][lead] == 0) {
-            i++;
-            if (i == rows) {
-                i = r;
-                lead++;
-                if (lead == cols)
-                    return;
+            for (int k = i; k < size; k++) {
+                m[j][k] -= facteur * m[i][k];// ka2an L2 <- L2 - (facteur x L1) 
             }
         }
-
-        // Swap rows i and r
-        for (int j = 0; j < cols; j++) {
-            int temp = mat[i][j];
-            mat[i][j] = mat[r][j];
-            mat[r][j] = temp;
-        }
-
-        // Reduce other rows
-        for (int i = r + 1; i < rows; i++) {
-            int lv = mat[i][lead];
-            for (int j = 0; j < cols; j++) {
-                mat[i][j] -= lv * mat[r][j];
-            }
-        }
-        lead++;
     }
 }
 
 int main() {
-    int matrix[ROWS][COLS] = {
-    {2, -1, 2},
-    {4, 3, -3},
-    {-2, 2, 1}
+    int size = 3;
+    double m[3][3] = {
+        {2, -1, 2},
+        {4, 3, -3},
+        {-2, 2, 1}
     };
 
-    printf("Original Matrix:\n");
-    printMatrix(matrix, ROWS, COLS);
+    matriceSimplifier(size, m);
 
-    echelonForm(matrix, ROWS, COLS);
-
-    printf("\nEchelon Form:\n");
-    printMatrix(matrix, ROWS, COLS);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%.2f\t", m[i][j]); // %.2f kermel to3rodle bas 2 chiffres apres la virgule
+        }
+        printf("\n");
+    }
 
     return 0;
+    //eh 3ezet bati5a ta y2ele l etapet taba3 l calcul fa tole3 badna njiib l facteur yali badna nodrob fi l sater
 }
