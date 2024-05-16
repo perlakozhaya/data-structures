@@ -1,69 +1,119 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-#define N 5
+#define N 7
+
+// Bubble Sort
+void tri_naif(int t[], int n) {
+    int i, j, tmp;
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (t[i] > t[j]) {
+                tmp = t[i];
+                t[i] = t[j];
+                t[j] = tmp;
+            }
+        }
+    }
+}
+
+void tri_bulle(int T[], int n) {
+    int i, j, E;
+    for (i = 1; i < n; i++) {
+        for (j = 0; j < n - i; j++) {
+            if (T[j] > T[j + 1]) {
+                E = T[j + 1];
+                T[j + 1] = T[j];
+                T[j] = E;
+            }
+        }
+    }
+}
 
 // Insertion Sort
-void tri_insertion(int T[], int n) {
+void tri_insertion(int t[], int n) {
     int i, j, k;
     int tmp;
     for (i = 1; i < n; i++) {
         j = 0;
-        while (T[j] < T[i]) {
+        while (t[j] < t[i]) { // for(j = 0; t[j] < t[i]; j++);
             j = j + 1;
         }
-        tmp = T[i];
-        for (k = i; k >= j + 1; k--) {
-            T[k] = T[k - 1];
+        tmp = t[i];
+        for (k = i; k >= j + 1; k--) { // k >= j | k > j
+            t[k] = t[k - 1]; // Shift elements to the right to make space for insertion
         }
-        T[j] = tmp;
+        t[j] = tmp; // Insert the element into its correct position
     }
 }
 
-void tri_insertion2(int T[], int n) {
-    int i, j, P, E;
-    for (i = 1; i < N; i++) {
-        E = T[i];
-        j = i - 1;
-        while (j >= 0) {
-            if (T[j] > E) {
-                T[j + 1] = T[j];
-                P = j;
-                j = j - 1;
+// Insertion dichotomique
+int position_dichotomique(int T[], int size, int n) {
+    int position, inf, sup, mid;
+    if(T[size - 1] <= n) {
+        position = size;
+    } 
+    else {
+        inf = 0;
+        sup = size - 1;
+        while(inf < sup) {
+            mid = (inf + sup) / 2;
+            if(T[mid] <= n) {
+                inf = mid + 1;
             }
             else {
-                P = j + 1;
-                j = -1;
+                sup = mid;
             }
         }
-        T[P] = E;
+        position = sup;
+    }
+    return position;
+}
+
+void insertion_dichotomique(int t[], int size) {
+    int i, k, j, tmp;
+    for(i = 1; i < size; i++) {
+        if(t[i] < t[i - 1]) {
+            tmp = t[i];
+            j = position_dichotomique(t, i-1, t[i]);
+            for(k = i; k > j; k--) {
+                t[k] = t[k - 1];
+            }
+            t[j] = tmp;
+        }
     }
 }
 
-void tri_insertion3(int T[], int n) {
-    int i, j, k;
-    for (i = 1; i < n; i++) {
-        for (j = 0; T[j] < T[i]; j++);
-        int tampon = T[i];
-        for (k = i; k > j; k--) {
-            T[k] = T[k - 1];
-
+// Selection Sort
+void selection_sort(int t[], int n) {
+    int min, tmp;
+    for(int i = 0; i < n - 1; i++) {
+        min = i;
+        for(int j = i + 1; j < n; j++) {
+            if(t[j] < t[min]) {
+                min = j;
+            }
         }
-        T[j] = tampon;
+        tmp = t[min];
+        t[min] = t[i];
+        t[i] = tmp;
     }
 }
 
 int main() {
-    int vecteur[N] = {3, 5, -10, 0, 0};
+    int vecteur[N] = {4, 7, 3, 1, 8, 6, 2};
 
-    for(int i = 0; i < N; i++) {
-        printf("%d " , vecteur[i]);
+    for (int i = 0; i < N; i++)
+    {
+        printf("%d ", vecteur[i]);
     }
     printf("\n");
 
-    tri_insertion3(vecteur, N);
+    insertion_dichotomique(vecteur, N);
 
-    for(int i = 0; i < N; i++) {
-        printf("%d " , vecteur[i]);
+    for (int i = 0; i < N; i++)
+    {
+        printf("%d ", vecteur[i]);
     }
     printf("\n");
 }
