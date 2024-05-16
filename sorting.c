@@ -101,7 +101,7 @@ void selection_sort(int t[], int n) {
 }
 
 int main() {
-    int vecteur[N] = {4, 7, 3, 1, 8, 6, 2};
+    int vecteur[N] = {-4, 7, 13, 1, 0, 6, 2};
 
     for (int i = 0; i < N; i++)
     {

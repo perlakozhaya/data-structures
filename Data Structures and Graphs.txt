@@ -51,6 +51,10 @@ Graph Algorithms
 		Bellman-Ford Algorithm
 		A* Algorithm
 		IDA* Algorithm
+	Minimum weight spanning tree (MST)
+		Kruskal's Algorithm
+		Prim's Algorithm
+		Sollin's Algorithm
 	Topological Sorting
 		Cycle
 		Reverse Topological Sort
