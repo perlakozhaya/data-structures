@@ -3,6 +3,14 @@
 
 #define N 7
 
+//print all elements of an array
+void display(int t[], int n){
+    for(int i = 0; i < n; i++){
+        printf("%d ", t[i]);
+    }
+    printf("\n");
+}
+
 // Bubble Sort
 void tri_naif(int t[], int n) {
     int i, j, tmp;
@@ -102,18 +110,9 @@ void selection_sort(int t[], int n) {
 
 int main() {
     int vecteur[N] = {4, 7, 3, 1, 8, 6, 2};
-
-    for (int i = 0; i < N; i++)
-    {
-        printf("%d ", vecteur[i]);
-    }
-    printf("\n");
+    display(vecteur, N);
 
     insertion_dichotomique(vecteur, N);
+    display(vecteur, N);
 
-    for (int i = 0; i < N; i++)
-    {
-        printf("%d ", vecteur[i]);
-    }
-    printf("\n");
 }
