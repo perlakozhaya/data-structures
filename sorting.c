@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define N 8
+#define N 10
 
 //print all elements of an array
 void display(int t[], int n){
@@ -108,46 +108,7 @@ void selection_sort(int t[], int n) {
     }
 }
 
-// void fusion(int t[], int n) {
-//     int l = t1[0];
-//     int r = t2[0];
-//     int i = 0;
-
-//     while (l < n1 && r < n2) {
-//         if (t1[l] <= t2[r]) {
-//             t[i] = t1[l];
-//             l++;
-//         } else {
-//             t[i] = t2[r];
-//             r++;
-//         }
-//         i++;
-//     }
-
-//     while (l < n1) {
-//         t[i] = t1[l];
-//         l++;
-//         i++;
-//     }
-
-//     while (r < n2) {
-//         t[i] = t2[r];
-//         r++;
-//         i++;
-//     }
-
-//     *n = n1 + n2;
-// }
-
-// void tri_fusion(int t[], int n, int left, int right) {
-//     int mid = (left + right) / 2;
-
-//     tri_fusion(t, n, left, mid);
-//     tri_fusion(t, n, mid + 1, right);
-
-//     fusion(t, t, t, n1, n2, *n);
-// }
-
+// Merge Sort
 void fusion(int arr[], int gauche, int milieu, int droite) {
     int i, j, k;
     int n1 = milieu - gauche + 1;
@@ -195,25 +156,80 @@ void fusion(int arr[], int gauche, int milieu, int droite) {
 }
 
 // Fonction de tri fusion récursif
-void triFusion(int arr[], int gauche, int droite) {
+void tri_fusion(int arr[], int gauche, int droite) {
     if (gauche < droite) {
         // Trouve le point médian pour diviser le tableau en deux moitiés
         int milieu = (gauche + droite) / 2;
 
         // Trie les deux moitiés
-        triFusion(arr, gauche, milieu);
-        triFusion(arr, milieu + 1, droite);
+        tri_fusion(arr, gauche, milieu);
+        tri_fusion(arr, milieu + 1, droite);
 
         // Fusionne les deux moitiés triées
         fusion(arr, gauche, milieu, droite);
     }
 }
 
+// Quick Sort
+// void tri_rapide(int t[], int debut, int fin) {
+//     int orange = debut - 1;
+//     int pivot = t[fin];
+//     int tmp;
+
+//     while(debut <= fin) {
+//         if(t[debut] <= pivot) {
+//             orange++;
+//             if(debut > orange) {
+//                 tmp = t[debut];
+//                 t[debut] = t[orange];
+//                 t[orange] = tmp;
+//             }
+//             else {
+//                 orange = debut;
+//             }
+//             debut++;
+//         }
+//         else {
+//             debut++;
+//         }
+//     }
+
+//     tri_rapide(t, debut, orange-1);
+//     tri_rapide(t, orange+1, fin);
+// }
+
+void tri_rapide(int t[], int debut, int fin) {
+    if (debut >= fin) {
+        return;
+    }
+    
+    int pivot = t[fin];
+    int orange = debut - 1;
+    int tmp;
+
+    for (int i = debut; i < fin; i++) {
+        if (t[i] <= pivot) {
+            orange++;
+            tmp = t[i];
+            t[i] = t[orange];
+            t[orange] = tmp;
+        }
+    }
+    
+    orange++;
+    tmp = t[orange];
+    t[orange] = t[fin];
+    t[fin] = tmp;
+
+    tri_rapide(t, debut, orange - 1);
+    tri_rapide(t, orange + 1, fin);
+}
+
 int main() {
-    int vecteur[N] = {4, 7, 3, 1, 8, 6, 2, 5};
+    int vecteur[N] = {3, 2, 5, 0, 1, 8, 7, 6, 9, 4};
     display(vecteur, N);
 
-    triFusion(vecteur, 0, N - 1);
+    tri_rapide(vecteur, 0, N-1);
 
     display(vecteur, N);
 }
