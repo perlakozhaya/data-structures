@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define N 7
+#define N 8
 
 //print all elements of an array
 void display(int t[], int n){
@@ -108,41 +108,112 @@ void selection_sort(int t[], int n) {
     }
 }
 
-void fusion(int t1[], int t2[], int t[], int n1, int n2, int *n) {
-    int l = t1[0];
-    int r = t2[0];
-    int i = 0;
+// void fusion(int t[], int n) {
+//     int l = t1[0];
+//     int r = t2[0];
+//     int i = 0;
 
-    while (l < n1 && r < n2) {
-        if (t1[l] <= t2[r]) {
-            t[i] = t1[l];
-            l++;
+//     while (l < n1 && r < n2) {
+//         if (t1[l] <= t2[r]) {
+//             t[i] = t1[l];
+//             l++;
+//         } else {
+//             t[i] = t2[r];
+//             r++;
+//         }
+//         i++;
+//     }
+
+//     while (l < n1) {
+//         t[i] = t1[l];
+//         l++;
+//         i++;
+//     }
+
+//     while (r < n2) {
+//         t[i] = t2[r];
+//         r++;
+//         i++;
+//     }
+
+//     *n = n1 + n2;
+// }
+
+// void tri_fusion(int t[], int n, int left, int right) {
+//     int mid = (left + right) / 2;
+
+//     tri_fusion(t, n, left, mid);
+//     tri_fusion(t, n, mid + 1, right);
+
+//     fusion(t, t, t, n1, n2, *n);
+// }
+
+void fusion(int arr[], int gauche, int milieu, int droite) {
+    int i, j, k;
+    int n1 = milieu - gauche + 1;
+    int n2 = droite - milieu;
+
+    // Crée des tableaux temporaires pour stocker les données
+    int L[n1], R[n2];
+
+    // Copie les données dans les tableaux temporaires L[] et R[]
+    for (i = 0; i < n1; i++) {
+        L[i] = arr[gauche + i];
+    }
+    for (j = 0; j < n2; j++) {
+        R[j] = arr[milieu + 1 + j];
+    }
+
+    // Fusionne les tableaux temporaires en un seul tableau arr[]
+    i = 0;
+    j = 0;
+    k = gauche;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
         } else {
-            t[i] = t2[r];
-            r++;
+            arr[k] = R[j];
+            j++;
         }
-        i++;
+        k++;
     }
 
-    while (l < n1) {
-        t[i] = t1[l];
-        l++;
+    // Copie les éléments restants de L[], si des éléments sont restants
+    while (i < n1) {
+        arr[k] = L[i];
         i++;
+        k++;
     }
 
-    while (r < n2) {
-        t[i] = t2[r];
-        r++;
-        i++;
+    // Copie les éléments restants de R[], si des éléments sont restants
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
     }
-    
-    *n = n1 + n2;
+}
+
+// Fonction de tri fusion récursif
+void triFusion(int arr[], int gauche, int droite) {
+    if (gauche < droite) {
+        // Trouve le point médian pour diviser le tableau en deux moitiés
+        int milieu = (gauche + droite) / 2;
+
+        // Trie les deux moitiés
+        triFusion(arr, gauche, milieu);
+        triFusion(arr, milieu + 1, droite);
+
+        // Fusionne les deux moitiés triées
+        fusion(arr, gauche, milieu, droite);
+    }
 }
 
 int main() {
-    int vecteur[N] = {4, 7, 3, 1, 8, 6, 2};
+    int vecteur[N] = {4, 7, 3, 1, 8, 6, 2, 5};
     display(vecteur, N);
 
-    insertion_dichotomique(vecteur, N);
+    triFusion(vecteur, 0, N - 1);
+
     display(vecteur, N);
 }
