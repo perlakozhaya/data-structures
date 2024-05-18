@@ -135,7 +135,8 @@ void fusion(int t1[], int t2[], int t[], int n1, int n2, int *n) {
         r++;
         i++;
     }
-    n = n1 + n2;
+    
+    *n = n1 + n2;
 }
 
 int main() {
