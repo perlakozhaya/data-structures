@@ -55,28 +55,27 @@ void tri_insertion(int t[], int n) {
     }
 }
 
-// Binary Insertion Sort
-int position_dichotomique(int t[], int size, int e) {
-    int inf, sup, mid;
-    if(t[size - 1] <= e) {
-        return size;
-    }
+// Insertion dichotomique
+int position_dichotomique(int T[], int size, int n) {
+    int position, inf, sup, mid;
+    if(T[size - 1] <= n) {
+        position = size;
+    } 
     else {
         inf = 0;
         sup = size - 1;
-        while(inf <= sup) {
+        while(inf < sup) {
             mid = (inf + sup) / 2;
-            if(t[mid] == e) {
-                return mid;
-            }
-            if(t[mid] < e) {
+            if(T[mid] <= n) {
                 inf = mid + 1;
             }
             else {
-                sup = mid - 1;
+                sup = mid;
             }
         }
+        position = sup;
     }
+    return position;
 }
 
 void insertion_dichotomique(int t[], int size) {
@@ -84,7 +83,7 @@ void insertion_dichotomique(int t[], int size) {
     for(i = 1; i < size; i++) {
         if(t[i] < t[i - 1]) {
             tmp = t[i];
-            j = position_dichotomique(t, i, t[i]);
+            j = position_dichotomique(t, i-1, t[i]);
             for(k = i; k > j; k--) {
                 t[k] = t[k - 1];
             }
@@ -116,9 +115,4 @@ int main() {
     insertion_dichotomique(vecteur, N);
     display(vecteur, N);
 
-    for (int i = 0; i < N; i++)
-    {
-        printf("%d ", vecteur[i]);
-    }
-    printf("\n");
 }
