@@ -114,5 +114,4 @@ int main() {
 
     insertion_dichotomique(vecteur, N);
     display(vecteur, N);
-
 }
