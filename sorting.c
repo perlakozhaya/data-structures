@@ -115,10 +115,4 @@ int main() {
 
     insertion_dichotomique(vecteur, N);
     display(vecteur, N);
-
-    for (int i = 0; i < N; i++)
-    {
-        printf("%d ", vecteur[i]);
-    }
-    printf("\n");
 }
