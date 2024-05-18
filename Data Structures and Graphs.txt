@@ -1,15 +1,15 @@
-Abstract Data Types (ADT)
+DATA STRUCTURES:
 
-Data Structures:
+Time Complexity
 
 Linear
-	Lists (ArrayList, LinkedList, Vector, Stack)
-	Stacks
-	Queues (Queue - FIFO, Dequeue - front and rear ends)
-
-Priority Queue
-	Array Implementation
-	Heap Implementation
+	Vectors
+	Lists
+	Stacks & Queues 
+		Stack - LIFO
+		Queue - FIFO
+		Dequeue - Front and rear ends
+		Priority Queue - Array & Heap Implementation
 	
 Trees
 	Binary Tree
@@ -24,17 +24,13 @@ Hash Table
 
 Table
 	Array Based Table (backed by a 2D Array)
-		Unsorted List - Linear Search
-		Sorted List - Binary Search
 	Tree Based Table (backed by a TreeMap)
-		Search for an element
-		Add an element
-		Remove an element
 	Hash Based Table (backed by a HashMap)
 
 Sorting Algorithms
+
 	
-Graph Theory: 
+GRAPH THEORY:
 
 Types of Graphs
 Representing Graphs

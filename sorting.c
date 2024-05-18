@@ -47,27 +47,28 @@ void tri_insertion(int t[], int n) {
     }
 }
 
-// Insertion dichotomique
-int position_dichotomique(int T[], int size, int n) {
-    int position, inf, sup, mid;
-    if(T[size - 1] <= n) {
-        position = size;
-    } 
+// Binary Insertion Sort
+int position_dichotomique(int t[], int size, int e) {
+    int inf, sup, mid;
+    if(t[size - 1] <= e) {
+        return size;
+    }
     else {
         inf = 0;
         sup = size - 1;
-        while(inf < sup) {
+        while(inf <= sup) {
             mid = (inf + sup) / 2;
-            if(T[mid] <= n) {
+            if(t[mid] == e) {
+                return mid;
+            }
+            if(t[mid] < e) {
                 inf = mid + 1;
             }
             else {
-                sup = mid;
+                sup = mid - 1;
             }
         }
-        position = sup;
     }
-    return position;
 }
 
 void insertion_dichotomique(int t[], int size) {
@@ -75,7 +76,7 @@ void insertion_dichotomique(int t[], int size) {
     for(i = 1; i < size; i++) {
         if(t[i] < t[i - 1]) {
             tmp = t[i];
-            j = position_dichotomique(t, i-1, t[i]);
+            j = position_dichotomique(t, i, t[i]);
             for(k = i; k > j; k--) {
                 t[k] = t[k - 1];
             }
@@ -101,18 +102,18 @@ void selection_sort(int t[], int n) {
 }
 
 int main() {
-    int vecteur[N] = {-4, 7, 13, 1, 0, 6, 2};
+    int vecteur[N] = {4, 7, 3, 1, 8, 6, 2};
 
-    for (int i = 0; i < N; i++)
-    {
+    printf("Original Array:\n");
+    for (int i = 0; i < N; i++) {
         printf("%d ", vecteur[i]);
     }
     printf("\n");
 
     insertion_dichotomique(vecteur, N);
 
-    for (int i = 0; i < N; i++)
-    {
+    printf("After:\n");
+    for (int i = 0; i < N; i++) {
         printf("%d ", vecteur[i]);
     }
     printf("\n");

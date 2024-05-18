@@ -10,7 +10,7 @@ because the compiler can determine the required memory size and perform the init
 #define N 10;
 int mat[N][N] = {{0}}; works
 
-In this C program, I will be using variable-length arrays (VLA) */
+In this C program, we will be using variable-length arrays (VLA) */
 
 // 1. Generate random values for a given matrix
 
@@ -138,6 +138,10 @@ void upperTriangular(int size, double m[size][size]) {
         printf("\n");
     }
 }
+
+// 7. Trouver la somme de deux matrices
+
+// 8. Remplir une matrice identité
 
 int main() {
     int m1[3][3] = {
