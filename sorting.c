@@ -108,6 +108,36 @@ void selection_sort(int t[], int n) {
     }
 }
 
+void fusion(int t1[], int t2[], int t[], int n1, int n2, int *n) {
+    int l = t1[0];
+    int r = t2[0];
+    int i = 0;
+
+    while (l < n1 && r < n2) {
+        if (t1[l] <= t2[r]) {
+            t[i] = t1[l];
+            l++;
+        } else {
+            t[i] = t2[r];
+            r++;
+        }
+        i++;
+    }
+
+    while (l < n1) {
+        t[i] = t1[l];
+        l++;
+        i++;
+    }
+
+    while (r < n2) {
+        t[i] = t2[r];
+        r++;
+        i++;
+    }
+    n = n1 + n2;
+}
+
 int main() {
     int vecteur[N] = {4, 7, 3, 1, 8, 6, 2};
     display(vecteur, N);
