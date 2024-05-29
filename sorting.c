@@ -171,59 +171,67 @@ void tri_fusion(int arr[], int gauche, int droite) {
 }
 
 // Quick Sort
-// void tri_rapide(int t[], int debut, int fin) {
-//     int orange = debut - 1;
-//     int pivot = t[fin];
-//     int tmp;
-
-//     while(debut <= fin) {
-//         if(t[debut] <= pivot) {
-//             orange++;
-//             if(debut > orange) {
-//                 tmp = t[debut];
-//                 t[debut] = t[orange];
-//                 t[orange] = tmp;
-//             }
-//             else {
-//                 orange = debut;
-//             }
-//             debut++;
-//         }
-//         else {
-//             debut++;
-//         }
-//     }
-
-//     tri_rapide(t, debut, orange-1);
-//     tri_rapide(t, orange+1, fin);
-// }
-
 void tri_rapide(int t[], int debut, int fin) {
-    if (debut >= fin) {
-        return;
-    }
-    
-    int pivot = t[fin];
     int orange = debut - 1;
+    int pivot = t[fin];
     int tmp;
 
-    for (int i = debut; i < fin; i++) {
-        if (t[i] <= pivot) {
+    while(debut < fin) {
+        if(t[debut] <= pivot) {
             orange++;
-            tmp = t[i];
-            t[i] = t[orange];
-            t[orange] = tmp;
+            if(debut > orange) {
+                tmp = t[debut];
+                t[debut] = t[orange];
+                t[orange] = tmp;
+            }
+            else {
+                orange = debut;
+            }
         }
+        debut++;
     }
-    
-    orange++;
-    tmp = t[orange];
-    t[orange] = t[fin];
-    t[fin] = tmp;
 
-    tri_rapide(t, debut, orange - 1);
-    tri_rapide(t, orange + 1, fin);
+    orange++;
+    if(debut > orange) {
+        tmp = t[debut];
+        t[debut] = t[orange];
+        t[orange] = tmp;
+    }
+
+    printf("orange: %d \t", orange);
+    printf("debut: %d \t", debut);
+    printf("fin: %d \t", fin);
+    printf("\n");
+    tri_rapide(t, 0, orange-1);
+    tri_rapide(t, orange+1, fin);
 }
+
+// void tri_rapide(int t[], int debut, int fin) {
+//     if (debut >= fin) {
+//         return;
+//     }
+    
+//     int pivot = t[fin];
+//     int orange = debut - 1;
+//     int tmp;
+
+//     for (int i = debut; i < fin; i++) {
+//         if (t[i] <= pivot) {
+//             orange++;
+//             tmp = t[i];
+//             t[i] = t[orange];
+//             t[orange] = tmp;
+//         }
+//     }
+    
+//     orange++;
+//     tmp = t[orange];
+//     t[orange] = t[fin];
+//     t[fin] = tmp;
+
+//     tri_rapide(t, debut, orange - 1);
+//     tri_rapide(t, orange + 1, fin);
+// }
 
 int main() {
     int vecteur[N] = {3, 2, 5, 0, 1, 8, 7, 6, 9, 4};
