@@ -59,6 +59,58 @@ int getInfo(node *list, int index){
     return 0;
 }
 
+node* acces_pos(node *liste, int k){
+    node *current = liste;
+    int i = 1;
+    while(i < k && current != NULL){
+        i++;
+        current = current->suivant;
+    }
+    return current;
+}
+
+int getInfoR(node *list, int index){
+    if(list != NULL) {
+        if(index == 0) {
+            return list->info;
+        }
+        else {
+            return getInfoR(list->suivant, --index);
+        }
+    }
+    else {
+        return 0;
+    }
+}
+
+int indexOf(node *list, int info) {
+    node *current = list;
+    int counter = 0;
+    while(current != NULL) {
+        if(info == current->info) {
+            return counter;
+        }
+        current = current->suivant;
+        counter++;
+    }
+    return -1;
+}
+
+int getIndex(node *list, int info, int index) {
+    if(list != NULL) {
+        if(list->info == info) {
+            return index;
+        }
+        return getIndex(list->suivant, info, index+1);
+    }
+    else {
+        return -1;
+    }
+}
+int indexOfR(node *list, int info) {
+    return getIndex(list, info, 0);
+}
+
 void freeList(node *list){
     node *temp;
     while (list != NULL) {
@@ -76,8 +128,11 @@ int main() {
     node *list = createList(V, Nb);
 
     printListR(list);
+    
+    printf("Index = %d\n", indexOf(list, 7));
+    printf("Recursive Index = %d\n", indexOfR(list, 7));
 
-    printf("%d", getInfo(list, 3));
+    printf("%d", getInfoR(list, 6));
     // Free the allocated memory
     freeList(list);
 
