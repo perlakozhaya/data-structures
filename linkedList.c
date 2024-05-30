@@ -37,6 +37,28 @@ void printList(node *list){
     printf("\n");
 }
 
+void printListR(node *list){
+    if(list == NULL){
+        printf("\n");
+    }else{
+    printf("%d ", list -> info);
+    printListR(list -> suivant);
+    }
+}
+
+int getInfo(node *list, int index){
+    int counter = 0;
+
+    while(list != NULL){
+        if(counter == index){
+            return list -> info;
+        }
+        list = list -> suivant;
+        counter++;
+    }
+    return 0;
+}
+
 void freeList(node *list){
     node *temp;
     while (list != NULL) {
@@ -53,10 +75,9 @@ int main() {
 
     node *list = createList(V, Nb);
 
-    if (list != NULL) {
-        printList(list);
-    }
+    printListR(list);
 
+    printf("%d", getInfo(list, 3));
     // Free the allocated memory
     freeList(list);
 
