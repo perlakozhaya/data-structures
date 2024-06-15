@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // Define the node struct
 typedef struct node {
@@ -111,12 +112,47 @@ int indexOfR(node *list, int info) {
     return getIndex(list, info, 0);
 }
 
-void freeList(node *list){
+void freeList(node *list) {
     node *temp;
     while (list != NULL) {
         temp = list;
         list = list->suivant;
         free(temp);
+    }
+}
+
+void addFirst(node **list, int value) {
+    node *newNode = (node*)malloc(sizeof(node));
+    newNode->info = value;
+    newNode->suivant = *list;
+    *list = newNode;
+}
+
+void removeFirst(node **list) {
+    node *temp = *list;
+    *list = (*list) -> suivant;
+    free(temp);
+}
+
+bool supprimer(node **list, int index) {
+    node* current = *list;
+    if(index == 0 && *list != NULL) {
+        removeFirst(list);
+        return true;
+    }
+    if(index > 0) {
+        while(current->suivant != NULL) {
+            if(index == 1) {
+                current->suivant = current->suivant->suivant;
+                return true;
+            }
+            index--;
+            current = current->suivant;
+        }
+        return false;
+    }
+    else {
+        return false;
     }
 }
 
@@ -129,10 +165,18 @@ int main() {
 
     printListR(list);
     
-    printf("Index = %d\n", indexOf(list, 7));
-    printf("Recursive Index = %d\n", indexOfR(list, 7));
+    // printf("Index = %d\n", indexOf(list, 7));
+    // printf("Recursive Index = %d\n", indexOfR(list, 7));
 
-    printf("%d", getInfoR(list, 6));
+    // addFirst(&list, 3);
+    // printListR(list);
+
+    // removeFirst(&list);
+    // printListR(list);
+
+    supprimer(&list, 4);
+    printListR(list);
+
     // Free the allocated memory
     freeList(list);
 

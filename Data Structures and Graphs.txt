@@ -42,15 +42,20 @@ Traversing Graphs or Trees
 Graph Algorithms
 	Connectivity
 	Transitive Closure
+		Roy-Warshall Algorithm
 	Shortest Path
 		Dijkstra Algorithm
 		Bellman-Ford Algorithm
-		A* Algorithm
-		IDA* Algorithm
 	Minimum weight spanning tree (MST)
 		Kruskal's Algorithm
 		Prim's Algorithm
 		Sollin's Algorithm
-	Topological Sorting
-		Cycle
-		Reverse Topological Sort
+	Maximum Flow Problem
+		Ford-Fulkerson Algorithm
+		Residual Graph
+		Minimum Cut
+Project Management
+	MPM Method
+	PERT Method
+	Gantt Diagram
+Linear Programming
