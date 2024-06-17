@@ -7,116 +7,59 @@
 typedef int element;
 
 // Stack - Array
-int pile[MAX];
-int size;
+element pile[MAX];
+int capacity = 0; // as programmers based on Richard capacity = ade fiya el array mech adde bet se3
 
 bool estVide() {
-    return size == 0;
+    return capacity == 0;
 }
 
 bool estPleine() {
-    return size == MAX;
+    return capacity == MAX;
 }
 
-void afficher(int pile[MAX]) {
+void empiler(element e) {
+    if(estPleine()) {
+        printf("Pile est pleine!");
+    }
+    else {
+        pile[capacity] = e;
+        capacity++;
+    }
+}
+
+element depiler() {
+    if(estVide()) {
+        printf("Pile est deja vide!");
+    }
+    else {
+        element temp = pile[capacity-1];
+        capacity--;
+        return temp;
+    }
+}
+
+void afficher() {
     if(estVide()) {
         printf("Pile vide");
     }
     else {
-        printf("[ ");
-        for(int i = 0; i < MAX; i++) {
+        for(int i = 0; i < capacity; i++) {
             printf("%d ", pile[i]);
         }
-        printf("]\n");
+        printf("\n");
     }
-}
-
-void push(int pile[MAX], int val) {
-    if(!estPleine()) {
-        for(int i = MAX-2; i >= 0; i--) {
-            pile[i + 1] = pile[i];
-        }
-        pile[0] = val;
-        size++;
-    }
-    else {
-        printf("Pile est pleine");
-    }
-    printf("size: %d", size);
-}
-
-void pop(int pile[MAX]) {
-    if(!estVide()) {
-        for(int i = 0; i < MAX-1; i++) {
-            pile[i] = pile[i+1];
-        }
-        pile[MAX-1] = 0;
-        size--;
-    }
-    else {
-        printf("Pile est deja vide");
-    }
-    printf("size: %d", size);
-}
-
-element* removeElement() {
-    element *val;
-    if(estVide()) {
-        printf("message d'erreur\n");
-        return NULL;
-    }
-    else {
-        size = size -1;
-        val = &pile[size];
-    }
-    return val;
 }
 
 // Stack - LinkedList
-typedef struct Node {
-    int data;
-    struct Node* next;
-} Node;
-Node* stack;
-
-void display(Node* stack) {
-    Node* current = stack;
-    while(current != NULL) {
-        printf("%d ", current->data);
-        current = current->next;
-    }
-    printf("\n");
-}
-
-void empiler(Node** stack, int val) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-
-    if(*stack != NULL) {
-        newNode->next = *stack;
-    }
-    newNode->data = val;
-    *stack = newNode;
-}
-
-void depiler(Node** stack) {
-    Node* temp = *stack;
-    if(*stack != NULL) {
-        *stack = (*stack)->next;
-    }
-    free(temp);
-}
 
 int main() {
-    // empiler(&stack, 4);
-    // display(stack);
-    // empiler(&stack, 7);
-    // display(stack);
-    // depiler(&stack);
-    // display(stack);
-    push(pile, 3);
-    afficher(pile);
-    push(pile, 4);
-    afficher(pile);
-    pop(pile);
-    afficher(pile);
+    empiler(3);
+    empiler(5);
+    empiler(4);
+    empiler(7);
+    empiler(1);
+    afficher();
+    depiler();
+    afficher();
 }
