@@ -52,14 +52,60 @@ void afficher() {
 }
 
 // Stack - LinkedList
+typedef struct Node{
+    element data;
+    struct Node* next;
+}Node;
+
+Node* stack = (Node*)malloc(sizeof(Node));
+
+bool isEmpty(){
+    return stack == NULL;
+}
+
+void push(Node** stack, element e){
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode-> data = e;
+
+    if(*stack == NULL){
+    *stack = newNode;
+    }
+
+    while(*stack != NULL){
+        *stack = (*stack)->next;
+        printf("%d", (*stack)->data);
+    }
+    printf("%d", (*stack)-> data);
+}
+
+element pop(Node** stack){
+    element temp;
+    while((*stack)->next != NULL){
+        *stack = (*stack)-> next;
+    }
+    temp = (*stack)-> data;
+    (*stack)->next = NULL;
+    return temp;
+}
+
+void display(){
+    printf("[");
+    while(!isEmpty){
+        printf("%d ", stack-> data);
+        stack = stack-> next;
+    }
+    printf("]\n");
+}
 
 int main() {
-    empiler(3);
-    empiler(5);
-    empiler(4);
-    empiler(7);
-    empiler(1);
-    afficher();
-    depiler();
-    afficher();
+    // empiler(3);
+    // empiler(5);
+    // empiler(4);
+    // empiler(7);
+    // empiler(1);
+    // afficher();
+    // depiler();
+    // afficher();
+
+    push(&stack,1);
 }
