@@ -57,44 +57,41 @@ typedef struct Node{
     struct Node* next;
 }Node;
 
-Node* stack = (Node*)malloc(sizeof(Node));
+Node* stack;
 
 bool isEmpty(){
     return stack == NULL;
 }
 
-void push(Node** stack, element e){
+void push(Node** stack, element e) {
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode-> data = e;
+ 
+    newNode->data = e;
+    newNode->next = NULL;
 
-    if(*stack == NULL){
-    *stack = newNode;
+    if (*stack == NULL) {
+        *stack = newNode;
+    }else{
+        Node* current = *stack;
+        
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
     }
-
-    while(*stack != NULL){
-        *stack = (*stack)->next;
-        printf("%d", (*stack)->data);
-    }
-    printf("%d", (*stack)-> data);
 }
 
 element pop(Node** stack){
-    element temp;
-    while((*stack)->next != NULL){
-        *stack = (*stack)-> next;
-    }
-    temp = (*stack)-> data;
-    (*stack)->next = NULL;
-    return temp;
+    
 }
 
-void display(){
-    printf("[");
-    while(!isEmpty){
-        printf("%d ", stack-> data);
-        stack = stack-> next;
+void display() {
+    Node* current = stack;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
     }
-    printf("]\n");
+    printf("NULL\n");
 }
 
 int main() {
@@ -108,4 +105,6 @@ int main() {
     // afficher();
 
     push(&stack,1);
+    push(&stack,3);
+    display();
 }
