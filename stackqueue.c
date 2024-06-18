@@ -60,7 +60,7 @@ typedef struct Node{
 Node* stack;
 
 bool isEmpty(){
-    return stack == NULL;
+    return stack->next == NULL;
 }
 
 void push(Node** stack, element e) {
@@ -81,8 +81,16 @@ void push(Node** stack, element e) {
     }
 }
 
-element pop(Node** stack){
-    
+element pop(Node** stack) {
+    Node* current = *stack;
+    Node* last;
+
+    while(current->next->next != NULL) {
+        current = current->next;
+    }
+    last = current->next;
+    current->next = NULL;
+    return last->data;
 }
 
 void display() {
@@ -106,5 +114,7 @@ int main() {
 
     push(&stack,1);
     push(&stack,3);
+    display();
+    printf("Removed: %d\n", pop(&stack));
     display();
 }
