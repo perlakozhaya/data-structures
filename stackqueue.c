@@ -119,7 +119,17 @@ void addQueue(element e){
 }
 
 void removeQueue(){
-
+    if(removePointer == MAX) {
+        removePointer = 0;
+    }
+    if(!isEmptyQueue()) {
+        queue[removePointer] = 0;
+        numberOfElements--;
+        removePointer++;
+    }
+    else {
+        printf("No more elements to remove hoonnn bi hottouwa Perla!!!!!!!!!");
+    }
 }
 
 void displayQueue(){
@@ -160,5 +170,8 @@ int main() {
     addQueue(9);
     addQueue(10);
     
+    displayQueue();
+
+    removeQueue();
     displayQueue();
 }
