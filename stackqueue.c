@@ -52,54 +52,40 @@ void afficher() {
 }
 
 // Stack - LinkedList
-typedef struct Node{
+typedef struct Node {
     element data;
     struct Node* next;
 }Node;
 
 Node* stack;
 
-bool isEmpty(){
+bool isEmpty() {
     return stack->next == NULL;
 }
 
 void push(Node** stack, element e) {
     Node* newNode = (Node*)malloc(sizeof(Node));
- 
     newNode->data = e;
-    newNode->next = NULL;
-
-    if (*stack == NULL) {
-        *stack = newNode;
-    }else{
-        Node* current = *stack;
-        
-        while (current->next != NULL) {
-            current = current->next;
-        }
-        current->next = newNode;
-    }
+    newNode->next = *stack;
+    *stack = newNode;
 }
 
 element pop(Node** stack) {
-    Node* current = *stack;
-    Node* last;
-
-    while(current->next->next != NULL) {
-        current = current->next;
-    }
-    last = current->next;
-    current->next = NULL;
-    return last->data;
+    Node* temp = *stack;
+    element e = (*stack)->data;
+    *stack = (*stack)->next;
+    free(temp);
+    return e;
 }
 
 void display() {
     Node* current = stack;
+    printf("[ ");
     while (current != NULL) {
-        printf("%d -> ", current->data);
+        printf("%d ", current->data);
         current = current->next;
     }
-    printf("NULL\n");
+    printf("]\n");
 }
 
 int main() {
@@ -114,7 +100,11 @@ int main() {
 
     push(&stack,1);
     push(&stack,3);
+    push(&stack,30);
+    push(&stack,13);
     display();
-    printf("Removed: %d\n", pop(&stack));
+    pop(&stack);
     display();
+    // printf("Removed: %d\n", pop(&stack));
+    // display();
 }

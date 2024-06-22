@@ -33,19 +33,24 @@ Sorting Algorithms
 GRAPH THEORY:
 
 Types of Graphs
+	Oriented
+	Non-oriented
+	Tree
 Representing Graphs
 	Adjacency Matrix
 	Adjacency List
+	Matrice d'incidence
+	Matrice Latine
 Traversing Graphs or Trees
 	Depth-First Search (DFS)
 	Breadth-First Search (BFS)
 Graph Algorithms
-	Connectivity
 	Transitive Closure
 		Roy-Warshall Algorithm
 	Shortest Path
 		Dijkstra Algorithm
 		Bellman-Ford Algorithm
+		Circuit absorbant
 	Minimum weight spanning tree (MST)
 		Kruskal's Algorithm
 		Prim's Algorithm
