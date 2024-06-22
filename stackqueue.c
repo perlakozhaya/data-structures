@@ -87,6 +87,34 @@ void display() {
     }
     printf("]\n");
 }
+//Queue - Array
+element queue[MAX];
+int te = 0;
+int qu = 0;
+int n = 0;
+
+bool isEmptyQueue(){
+    return n == 0;
+}
+
+bool isFullQueue(){
+    return n == MAX;
+}
+
+/*fi chi esmo initialisation lal queue 
+yali hiye menzid zeroyet 3al array*/
+
+void addQueue(element e){
+    if(!isFullQueue()){
+    queue[n] = e;
+    }else{
+        printf("queue is full");
+    }
+}
+
+void removeQueue(){
+    queue[]
+}
 
 int main() {
     // empiler(3);
