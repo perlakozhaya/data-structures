@@ -89,31 +89,47 @@ void display() {
 }
 //Queue - Array
 element queue[MAX];
-int te = 0;
-int qu = 0;
-int n = 0;
+int addPointer = 0;
+int removePointer = 0;
+int numberOfElements = 0;
 
 bool isEmptyQueue(){
-    return n == 0;
+    return numberOfElements == 0;
 }
 
 bool isFullQueue(){
-    return n == MAX;
+    return numberOfElements == MAX;
 }
 
 /*fi chi esmo initialisation lal queue 
 yali hiye menzid zeroyet 3al array*/
 
 void addQueue(element e){
-    if(!isFullQueue()){
-    queue[n] = e;
+    printf("0");
+    if(addPointer == MAX){
+        addPointer = 0;
+        printf("if 1");
+    }
+    if(isEmpty() || addPointer != removePointer){
+        queue[addPointer] = e;
+        numberOfElements++;
+        addPointer++;
+        printf("if 2");
     }else{
-        printf("queue is full");
+        printf("l file melyene :|\n");
     }
 }
 
 void removeQueue(){
-    queue[]
+
+}
+
+void displayQueue(){
+    printf("[  ");
+    for(int i = 0; i < numberOfElements; i++){
+        printf("%d  ", queue[i]);
+    }
+    printf("]\n");
 }
 
 int main() {
@@ -126,13 +142,17 @@ int main() {
     // depiler();
     // afficher();
 
-    push(&stack,1);
-    push(&stack,3);
-    push(&stack,30);
-    push(&stack,13);
-    display();
-    pop(&stack);
-    display();
-    // printf("Removed: %d\n", pop(&stack));
+    // push(&stack,1);
+    // push(&stack,3);
+    // push(&stack,30);
+    // push(&stack,13);
     // display();
+    // pop(&stack);
+    // display();
+    
+    //queue - array
+    addQueue(1);
+    addQueue(2);
+    addQueue(3);
+    displayQueue();
 }
