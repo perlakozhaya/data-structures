@@ -105,18 +105,16 @@ bool isFullQueue(){
 yali hiye menzid zeroyet 3al array*/
 
 void addQueue(element e){
-    printf("0");
     if(addPointer == MAX){
         addPointer = 0;
-        printf("if 1");
     }
-    if(isEmpty() || addPointer != removePointer){
+    
+    if(isEmptyQueue() || addPointer != removePointer){
         queue[addPointer] = e;
         numberOfElements++;
         addPointer++;
-        printf("if 2");
     }else{
-        printf("l file melyene :|\n");
+        printf("\nl file melyene :|\n");
     }
 }
 
@@ -126,7 +124,7 @@ void removeQueue(){
 
 void displayQueue(){
     printf("[  ");
-    for(int i = 0; i < numberOfElements; i++){
+    for(int i = 0; i < MAX; i++){
         printf("%d  ", queue[i]);
     }
     printf("]\n");
@@ -154,5 +152,13 @@ int main() {
     addQueue(1);
     addQueue(2);
     addQueue(3);
+    addQueue(4);
+    addQueue(5);
+    addQueue(6);
+    addQueue(7);
+    addQueue(8);
+    addQueue(9);
+    addQueue(10);
+    
     displayQueue();
 }
