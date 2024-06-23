@@ -142,7 +142,6 @@ void displayQueue(){
 
 //Queue - LinkedList
 typedef struct Queue{
-    Node* node;
     Node* APointer;
     Node* DPointer;
 }Queue;
@@ -169,6 +168,16 @@ void addQueueList(Queue* q, element e){
         // Otherwise, add the new node to the end and update APointer
         q->APointer->next = newNode;
         q->APointer = newNode;
+    }
+}
+
+element removeQueueList(Queue* q) {
+    if(q->DPointer != NULL) {
+        Node* temp = q->DPointer;
+        element e = q->DPointer->data;
+        q->DPointer = q->DPointer->next;
+        free(temp);
+        return e;
     }
 }
 
@@ -222,5 +231,15 @@ int main() {
     addQueueList(q, 4);
     addQueueList(q, -2);
     addQueueList(q, 3);
+    addQueueList(q, 32);
+    addQueueList(q, 13);
+    displayQueueList(q);
+    removeQueueList(q);
+    removeQueueList(q);
+    removeQueueList(q);
+    removeQueueList(q);
+    removeQueueList(q);
+    removeQueueList(q);
+    removeQueueList(q);
     displayQueueList(q);
 }
