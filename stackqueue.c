@@ -140,6 +140,47 @@ void displayQueue(){
     printf("]\n");
 }
 
+//Queue - LinkedList
+typedef struct Queue{
+    Node* node;
+    Node* APointer;
+    Node* DPointer;
+}Queue;
+
+Queue* createQueue(){
+    Queue* q = (Queue*)malloc(sizeof(Queue));
+    q-> APointer = NULL;
+    q-> DPointer = NULL;
+
+    return q;
+}
+
+
+void addQueueList(Queue* q, element e){
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = e;
+    newNode->next = NULL;
+
+    if (q->APointer == NULL) {
+        // If the queue is empty, both pointers should point to the new node
+        q->APointer = newNode;
+        q->DPointer = newNode;
+    } else {
+        // Otherwise, add the new node to the end and update APointer
+        q->APointer->next = newNode;
+        q->APointer = newNode;
+    }
+}
+
+void displayQueueList(Queue* q){
+    Node* current = q->DPointer;
+    printf("[  ");
+    while (current != NULL) {
+        printf("%d  ", current->data);
+        current = current->next;
+    }
+    printf("]\n");
+}
 int main() {
     // empiler(3);
     // empiler(5);
@@ -159,19 +200,27 @@ int main() {
     // display();
     
     //queue - array
-    addQueue(1);
-    addQueue(2);
-    addQueue(3);
-    addQueue(4);
-    addQueue(5);
-    addQueue(6);
-    addQueue(7);
-    addQueue(8);
-    addQueue(9);
-    addQueue(10);
+    // addQueue(1);
+    // addQueue(2);
+    // addQueue(3);
+    // addQueue(4);
+    // addQueue(5);
+    // addQueue(6);
+    // addQueue(7);
+    // addQueue(8);
+    // addQueue(9);
+    // addQueue(10);
     
-    displayQueue();
+    // displayQueue();
 
-    removeQueue();
-    displayQueue();
+    // removeQueue();
+    // displayQueue();
+
+    //queue - LinkedList
+    Queue* q = createQueue();
+
+    addQueueList(q, 4);
+    addQueueList(q, -2);
+    addQueueList(q, 3);
+    displayQueueList(q);
 }
