@@ -44,6 +44,7 @@ Representing Graphs
 Traversing Graphs or Trees
 	Depth-First Search (DFS)
 	Breadth-First Search (BFS)
+	Pre-visit, post-visit
 Graph Algorithms
 	Transitive Closure
 		Roy-Warshall Algorithm
