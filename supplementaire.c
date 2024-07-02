@@ -104,110 +104,62 @@ typedef struct Doubly {
 } Doubly;
 
 Doubly* createDoubly() {
-    Doubly* list = (Doubly*)malloc(sizeof(Doubly));
-    list->next = NULL;
-    list->previous = NULL;
-
+    Doubly* list = NULL;
     return list;
 }
 
-void addDoubly(Doubly** list, element e, int k) {
-    int counter = 0;
+void addDoubly(Doubly** list, element e) {
     Doubly* newDoubly = (Doubly*)malloc(sizeof(Doubly));
     newDoubly->data = e;
-    newDoubly->next = NULL;
     newDoubly->previous = NULL;
+    newDoubly->next = NULL;
 
-    // Handle insertion at the head of the list
-    if (k == 0 || *list == NULL) {
-        newDoubly->next = *list;
-        if (*list != NULL) {
-            (*list)->previous = newDoubly;
+    if(*list == NULL) {
+        *list = newDoubly;
+    }
+    else {
+        Doubly* current = *list;
+        while(current->next != NULL) {
+            current = current->next;
         }
-        *list = newDoubly;
-        return;
+        current->next = newDoubly;
+        newDoubly->previous = current;
+        newDoubly->next = NULL;
     }
-
-    Doubly* current = *list;
-
-    // Traverse to the k-th position or end of the list
-    while (counter < k - 1 && current->next != NULL) {
-        current = current->next;
-        counter++;
-    }
-
-    // Insert the new node
-    newDoubly->next = current->next;
-    newDoubly->previous = current;
-
-    if (current->next != NULL) {
-        current->next->previous = newDoubly;
-    }
-    current->next = newDoubly;
-}
-
-void addElement(Doubly** list, element e, int k) {
-    int counter = 0;
-    Doubly* newDoubly = (Doubly*)malloc(sizeof(Doubly));
-    newDoubly->data = e;
-    newDoubly->next = NULL;
-    newDoubly->previous = NULL;
-
-    // Si la liste est vide et qu'on veut ajouter après la position 0
-    if (*list == NULL) {
-        *list = newDoubly;
-        return;
-    }
-
-    Doubly* current = *list;
-
-    // Parcours de la liste jusqu'à la position k
-    while (counter < k && current->next != NULL) {
-        current = current->next;
-        counter++;
-    }
-
-    // Insertion du nouveau nœud après la position k
-    newDoubly->next = current->next;
-    newDoubly->previous = current;
-
-    if (current->next != NULL) {
-        current->next->previous = newDoubly;
-    }
-    current->next = newDoubly;
 }
 
 void afficher(Doubly* list) {
-    while(list->next != NULL) {
-        printf("%d", list->data);
-        list = list-> next;
+    while(list != NULL) {
+        printf("%d ", list->data);
+        list = list->next;
     }
+    printf("\n");
 }
 
 int main() {
-    Node* liste1 = NULL;
+    // Node* liste1 = NULL;
 
-    ajouterNoeud(&liste1, 1);
-    ajouterNoeud(&liste1, 3);
-    ajouterNoeud(&liste1, 5);
+    // ajouterNoeud(&liste1, 1);
+    // ajouterNoeud(&liste1, 3);
+    // ajouterNoeud(&liste1, 5);
 
-    printf("Liste 1 avant: ");
-    afficherListe(liste1);
+    // printf("Liste 1 avant: ");
+    // afficherListe(liste1);
     
-    inverse(liste1);
+    // inverse(liste1);
 
-    printf("Liste 1 apres: ");
-    afficherListe(liste1);
+    // printf("Liste 1 apres: ");
+    // afficherListe(liste1);
 
+    // Doubly* list = createDoubly();
     Doubly* list = createDoubly();
-    addDoubly(&list, 4, 0);
-    addDoubly(&list, 3, 1);
-    addDoubly(&list, 2, 2);
+    addDoubly(&list, 4);
+    addDoubly(&list, 3);
+    addDoubly(&list, 2);
     afficher(list);
     
-    printf("\n");
-    addElement(&list, 1, 1);
-    afficher(list);
+    // addElement(&list, 1, 1);
+    // afficher(list);
   
     return 0;
 }
