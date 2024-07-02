@@ -128,6 +128,83 @@ void addDoubly(Doubly** list, element e) {
     }
 }
 
+void addElement(Doubly** list, element e, int k) {
+    Doubly* new_node = (Doubly*)malloc(sizeof(Doubly));
+    new_node->data = e;
+
+    if (*list == NULL) {
+        if (k == 0) {
+            new_node->next = NULL;
+            new_node->previous = NULL;
+            *list = new_node;
+            printf("Inserted at the beginning\n");
+        } else {
+            printf("Index Out Of Bounds\n");
+            free(new_node);
+        }
+        return;
+    }
+
+    Doubly* current = *list;
+    int counter = 0;
+
+    // Traverse to the k-th element
+    while (current != NULL && counter < k) {
+        current = current->next;
+        counter++;
+    }
+
+    if (counter != k || current == NULL) {
+        printf("Index Out Of Bounds\n");
+        free(new_node);
+        return;
+    }
+
+    // Insert the new node after the k-th element
+    new_node->next = current->next;
+    new_node->previous = current;
+    if (current->next != NULL) {
+        current->next->previous = new_node;
+    }
+    current->next = new_node;
+
+    printf("Element added after index %d\n", k);
+}
+
+void removeDoubly(Doubly** list, element e) {
+    if(*list == NULL){
+        printf("List Is Empty");
+        return;
+    }
+    Doubly* current = *list;
+
+    while(current != NULL) {
+        if(current->data == e) {
+            Doubly* temp = current;
+            if(current->previous == NULL) {
+                *list = current->next;
+                current->next->previous = NULL;
+                free(temp);
+            }
+
+            else if(current->next == NULL) {
+                current->previous->next = NULL;
+                free(temp);
+            }
+
+            else {
+                current->previous->next = current->next;
+                current->next->previous = current->previous;
+                free(temp);
+            }
+            current = temp->next;
+        }
+        else {
+            current = current->next;
+        }
+    }
+}
+
 void afficher(Doubly* list) {
     while(list != NULL) {
         printf("%d ", list->data);
@@ -158,8 +235,11 @@ int main() {
     addDoubly(&list, 2);
     afficher(list);
     
-    // addElement(&list, 1, 1);
-    // afficher(list);
-  
+    addElement(&list, 1, 0);
+    afficher(list);
+
+    removeDoubly(&list, 1);
+    afficher(list);
+ 
     return 0;
 }
