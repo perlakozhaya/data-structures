@@ -205,6 +205,80 @@ void removeDoubly(Doubly** list, element e) {
     }
 }
 
+// Exercice 2: egalite entre deux listes
+bool egalite(Node* l1, Node* l2) {
+    while(l1 != NULL && l2 != NULL) {
+        if(l1->data != l2->data) {
+            return false;
+        }
+        l1 = l1->next;
+        l2 = l2->next;
+    }
+    return true;
+}
+
+int rangPair(Node* list) {
+    int i = 1;
+    int somme = 0;
+    while(list != NULL) {
+        if(i % 2 == 0) {
+            somme += list->data;
+        }
+        i++;
+        list = list->next;
+    }
+    return somme;
+}
+
+void deleteAllOcc(Node* list) {
+
+}
+
+void deleteOcc(Node** list, element e) {
+    Node* temp;
+    Node* current = *list;
+    int occ = 0;
+    while(current != NULL) {
+        if(current->data == e) {
+            occ++;
+        }
+        if(occ > 1) {
+            temp = current;
+            current = current->next;
+            free(temp);
+        }
+        current = current->next;
+    }
+}
+
+void delete_occ(Node** list, element e){
+    Node* temp = (*list);
+    Node* current = (*list);
+    
+    if(*list == NULL){
+        printf("list is empty");
+        return;
+    }
+
+    while(current != NULL){
+        if(current->data == e) {
+            break;
+        }
+        current = current->next;
+    }
+
+    while(current->next != NULL){
+        if(current->next->data == e){
+            temp = current->next;
+            current->next = current->next->next;
+            free(temp);
+        }
+        else {
+            current = current->next;
+        }
+    }
+}
+
 void afficher(Doubly* list) {
     while(list != NULL) {
         printf("%d ", list->data);
@@ -214,32 +288,36 @@ void afficher(Doubly* list) {
 }
 
 int main() {
-    // Node* liste1 = NULL;
+    Node* liste1 = NULL;
 
-    // ajouterNoeud(&liste1, 1);
-    // ajouterNoeud(&liste1, 3);
-    // ajouterNoeud(&liste1, 5);
+    ajouterNoeud(&liste1, 3);
+    ajouterNoeud(&liste1, 3);
+    ajouterNoeud(&liste1, 5);
+    ajouterNoeud(&liste1, 3);
+    ajouterNoeud(&liste1, 7);
+    ajouterNoeud(&liste1, 3);
+
+    afficherListe(liste1);
+    delete_occ(&liste1, 3);
+    afficherListe(liste1);
 
     // printf("Liste 1 avant: ");
     // afficherListe(liste1);
-    
     // inverse(liste1);
-
     // printf("Liste 1 apres: ");
     // afficherListe(liste1);
 
     // Doubly* list = createDoubly();
-    Doubly* list = createDoubly();
-    addDoubly(&list, 4);
-    addDoubly(&list, 3);
-    addDoubly(&list, 2);
-    afficher(list);
+    // addDoubly(&list, 4);
+    // addDoubly(&list, 3);
+    // addDoubly(&list, 2);
+    // afficher(list);
     
-    addElement(&list, 1, 0);
-    afficher(list);
+    // addElement(&list, 1, 0);
+    // afficher(list);
 
-    removeDoubly(&list, 1);
-    afficher(list);
+    // removeDoubly(&list, 1);
+    // afficher(list);
  
     return 0;
 }
