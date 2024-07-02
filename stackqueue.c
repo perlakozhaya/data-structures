@@ -57,6 +57,11 @@ typedef struct Node {
     struct Node* next;
 }Node;
 
+typedef struct stack {
+    element e;
+    struct stack* top;
+}stack;
+
 Node* stack;
 
 bool isEmpty() {

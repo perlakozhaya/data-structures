@@ -206,33 +206,6 @@ void tri_rapide(int t[], int debut, int fin) {
     tri_rapide(t, orange+1, fin);
 }
 
-// void tri_rapide(int t[], int debut, int fin) {
-//     if (debut >= fin) {
-//         return;
-//     }
-    
-//     int pivot = t[fin];
-//     int orange = debut - 1;
-//     int tmp;
-
-//     for (int i = debut; i < fin; i++) {
-//         if (t[i] <= pivot) {
-//             orange++;
-//             tmp = t[i];
-//             t[i] = t[orange];
-//             t[orange] = tmp;
-//         }
-//     }
-    
-//     orange++;
-//     tmp = t[orange];
-//     t[orange] = t[fin];
-//     t[fin] = tmp;
-
-//     tri_rapide(t, debut, orange - 1);
-//     tri_rapide(t, orange + 1, fin);
-// }
-
 int main() {
     int vecteur[N] = {3, 2, 5, 0, 1, 8, 7, 6, 9, 4};
     display(vecteur, N);
