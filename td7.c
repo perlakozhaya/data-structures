@@ -10,65 +10,54 @@ int capacity = 0;
 
 int queue[MAX];
 
-bool isEmpty() {
+bool isEmpty(int s[]) {
     return capacity == 0;
 }
 
-bool isFull() {
+bool isFull(int s[]) {
     return capacity == MAX;
 }
 
-int pop() {
-    if(isEmpty()) {
+int pop(int s[]) {
+    if(isEmpty(s)) {
         printf("Stack already empty!");
         return 0;
     }
     else {
-        int to_delete = stack[capacity];
+        int to_delete = s[capacity];
         capacity--;
         return to_delete;
     }
 }
 
-void push(int element) {
-    if(isFull()) {
+void push(int s[], int element) {
+    if(isFull(s)) {
         printf("Stack is full");
     }
     else {
-        stack[capacity] = element;
+        s[capacity] = element;
         capacity++;
     }
 }
 
-void display() {
+void display(int s[]) {
     for(int i = 0; i < capacity; i++) {
-        printf("%d ", stack[i]);
+        printf("%d ", s[i]);
     }
     printf("\n");
 }
 
-int estPalindrome(char word[], int length) {
-    for(int i = 0; i < length; i++) {
-        if(i < length/2) {
-            push(word[i]);
-        }
-        else if (i > length/2) {
-            if(pop() != word[i]) {
-                return 0;
-            }
-            else {
-                return 1;
-            }
+void sortArray(int tab[], int size) {
+    int p1[MAX];
+    int p2[MAX];
+
+    for(int i = 0; i < size; i++) {
+        if(isEmpty(p1)) {
+            
         }
     }
 }
 
 int main() {
-    // push(3);
-    // push(2);
-    // push(5);
-    // push(2);
-    // push(3);
-    char word[] = "ab";
-    printf("%d", estPalindrome(word, 3));
+    int a[] = {5, 7, 2, 4, 8, 6, 3, 1 ,8};
 }
