@@ -27,18 +27,39 @@ arbre* deBasEnHaut() {
     return racine;
 }
 
-void parcours_arbre(arbre* arbre) {
-    parcours_arbre(arbre->gauche);
-    parcours_arbre(arbre->droite);
+bool egalite_arbres(arbre* arbre1, arbre* arbre2) {
+    // Check if both trees are NULL
+    if (arbre1 == NULL && arbre2 == NULL) {
+        return true;  // They are equal
+    }
+    
+    // Check if both trees are not NULL
+    if (arbre1 != NULL && arbre2 != NULL) {
+        // Compare current node values and recursively check left and right subtrees
+        return (arbre1->valeur == arbre2->valeur) 
+               && egalite_arbres(arbre1->gauche, arbre2->gauche)
+               && egalite_arbres(arbre1->droite, arbre2->droite);
+    }
+    
+    // If one tree is NULL and the other is not, they are not equal
+    return false;
 }
 
-bool egalite_arbres(arbre* arbre1, arbre* arbre2) {
+arbre* get_path_aux(arbre* T, int arrivee) {
+    arbre* Q = (arbre*)malloc(sizeof(arbre));
 
+    if(T->valeur == arrivee) {
+        return Q;
+    }
+    get_path_aux(T->gauche, arrivee);
+    get_path_aux(T->droite, arrivee);
 }
 
 int main() {
     arbre* arbre1 = deBasEnHaut();
     arbre* arbre2 = deBasEnHaut();
+
+    printf("%d", egalite_arbres(arbre1, arbre2));
 
     return 0;
 }
