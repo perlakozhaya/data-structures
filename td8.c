@@ -2,32 +2,31 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct arbre {
+typedef struct Arbre {
     int valeur;
-    struct arbre* gauche;
-    struct arbre* droite;
-} arbre;
+    struct Arbre* gauche;
+    struct Arbre* droite;
+} Arbre;
 
-arbre* construire_arbre(int n, arbre* g, arbre* d) {
-    arbre* root = (arbre*)malloc(sizeof(arbre));
+Arbre* construire_arbre(int n, Arbre* g, Arbre* d) {
+    Arbre* root = (Arbre*)malloc(sizeof(Arbre));
     root->valeur = n;
     root->gauche = g;
     root->droite = d;
 }
 
-arbre* deBasEnHaut() {
-    arbre* n1 = construire_arbre(10, NULL, NULL);
-    arbre* n2 = construire_arbre(3, NULL, NULL);
-    arbre* n3 = construire_arbre(-4, n2, NULL);
-    arbre* n4 = construire_arbre(0, NULL, n1);
-    arbre* n5 = construire_arbre(2, NULL, NULL);
-    arbre* n6 = construire_arbre(6, n4, n5);
-    arbre* racine = construire_arbre(8, n3, n6);
+Arbre* deBasEnHaut() {
+    Arbre* n1 = construire_arbre(10, NULL, NULL);
+    Arbre* n2 = construire_arbre(3, NULL, NULL);
+    Arbre* n3 = construire_arbre(4, n2, NULL);
+    Arbre* n5 = construire_arbre(20, NULL, NULL);
+    Arbre* n6 = construire_arbre(16, n1, n5);
+    Arbre* racine = construire_arbre(8, n3, n6);
 
     return racine;
 }
 
-bool egalite_arbres(arbre* arbre1, arbre* arbre2) {
+bool egalite_arbres(Arbre* arbre1, Arbre* arbre2) {
     // Check if both trees are NULL
     if (arbre1 == NULL && arbre2 == NULL) {
         return true;  // They are equal
@@ -45,21 +44,44 @@ bool egalite_arbres(arbre* arbre1, arbre* arbre2) {
     return false;
 }
 
-arbre* get_path_aux(arbre* T, int arrivee) {
-    arbre* Q = (arbre*)malloc(sizeof(arbre));
-
-    if(T->valeur == arrivee) {
-        return Q;
+// Exercice 4
+int max_valeur(Arbre* a) {
+    if(a == NULL) {
+        printf("L'arbre est vide.\n");
+        return -1;
     }
-    get_path_aux(T->gauche, arrivee);
-    get_path_aux(T->droite, arrivee);
+    if(a->droite == NULL) {
+        return a->valeur;
+    }
+    return max_valeur(a->droite);
+}
+
+int supprimeMax(Arbre* a) {
+    if(a == NULL) {
+        printf("L'arbre est vide.\n");
+        return -1;
+    }
+
+    Arbre* temp;
+    if(a->droite->valeur == max_valeur(a)) {
+        temp = a->droite;
+        if(a->droite->gauche != NULL) {
+            a->droite = a->droite->gauche;
+        }
+        else {
+            a->droite = NULL;
+        }
+        int e = temp->valeur;
+        free(temp);
+        return e;
+    }
+    return supprimeMax(a->droite);
 }
 
 int main() {
-    arbre* arbre1 = deBasEnHaut();
-    arbre* arbre2 = deBasEnHaut();
+    Arbre* arbre1 = deBasEnHaut();
 
-    printf("%d", egalite_arbres(arbre1, arbre2));
+    printf("%d", supprimeMax(arbre1));
 
     return 0;
 }

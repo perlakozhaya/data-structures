@@ -85,20 +85,20 @@ void postfixe(noeud *racine) {
 //     }
 // }
 
-// // BINARY SEARCH TREE
-// // L’arbre est ordonné => On peut choisir le sous-arbre dans lequel il faut rechercher val (BST)
-// bool rechdicho(noeud *racine, element val) {
-//     if(racine == NULL) return false;
-//     else {
-//         if((*racine).info == val) return true;
-//         else { 
-//             if((*racine).info < val)
-//                 return rechdicho((*racine).droite, val);
-//             else
-//                 return rechdicho((*racine).gauche, val);
-//         }
-//     }
-// }
+// BINARY SEARCH TREE
+// L’arbre est ordonné => On peut choisir le sous-arbre dans lequel il faut rechercher val (BST)
+bool rechdicho(noeud *racine, element val) {
+    if(racine == NULL) return false;
+    else {
+        if((*racine).info == val) return true;
+        else { 
+            if((*racine).info < val)
+                return rechdicho((*racine).droite, val);
+            else
+                return rechdicho((*racine).gauche, val);
+        }
+    }
+}
 
 // // insertion dans un arbre binaire ordonné
 // void insertion(noeud **racine, element val) {
